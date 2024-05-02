@@ -7,17 +7,20 @@
     <link rel="stylesheet" href="{% static 'styles/reg_style.css' %}">
   </head>
   <body>
-    <form action="" method="post">
+    
+    <form action="{% url 'registration' %}" method="post">
       {% csrf_token %}
+
+      {{type_form.profile_type}}
 
       {{ form.username.label }}
       {{ form.username }}
 
-      {{ form.name.label }}
-      {{ form.name }}
+      {{ form.first_name.label }}
+      {{ form.first_name }}
       
-      {{ form.surname.label }}
-      {{ form.surname }}
+      {{ form.last_name.label }}
+      {{ form.last_name }}
 
       {{ form.email.label }}
       {{ form.email }}

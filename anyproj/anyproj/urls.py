@@ -17,12 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from profiles.views import *
+from profiles.views import ExecutorRegView, ProfileView, ChoiseView, IndexView, Test
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    path('', ProfileView.as_view()),
-    path('login/', LoginView.as_view()),
-    path('registration/', RegView.as_view()),
+    path('', IndexView.as_view(), name='index'),
+    path('profile/', ProfileView.as_view(), name='profile'),
+    path('registration/', Test.as_view(), name='registration'),
+    # path('customer_reg/', CustomerRegView.as_view(), name='cust_reg'),
 ]

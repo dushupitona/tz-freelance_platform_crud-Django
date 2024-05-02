@@ -7,10 +7,16 @@
     <link rel="stylesheet" href="{% static 'styles/index_style.css' %}">
 </head>
 <body>
-    <div class="top-bar">
-        <a href="#registration">Регистрация</a>
-        <a href="#login">Вход</a>
-    </div>
+    {% if user.is_authenticated %}
+        <div class="top-bar">
+            <a href="{% url 'profile' %}">Профиль</a>
+        </div>
+    {% else %}    
+        <div class="top-bar">
+            <a href="{% url 'registration' %}">Регистрация</a>
+            <a href="#login">Вход</a>
+        </div>
+    {% endif %}  
 
     <!-- Page content goes here -->
 </body>
