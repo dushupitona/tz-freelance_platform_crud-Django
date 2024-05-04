@@ -9,12 +9,13 @@
 <body>
     {% if user.is_authenticated %}
         <div class="top-bar">
-            <a href="{% url 'profile' %}">Профиль</a>
+            <a href="{% url 'prof_type' %}">Профиль</a>
+            <a href="{% url 'logout' %}">Выйти</a>
         </div>
     {% else %}    
         <div class="top-bar">
             <a href="{% url 'registration' %}">Регистрация</a>
-            <a href="#login">Вход</a>
+            <a href="{% url 'login' %}">Вход</a>
         </div>
     {% endif %}  
 

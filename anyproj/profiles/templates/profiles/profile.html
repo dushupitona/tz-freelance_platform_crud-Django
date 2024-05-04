@@ -9,8 +9,60 @@
 <body>
 
     <div class="top-bar">
-        <p>Customer</p>
+        <p>{{ bar_title }}</p>
     </div>
+
+    <div class="main">
+        <h2>{{ user.first_name }}</h2>
+        <h2>{{ user.last_name }}</h2>
+        <h2>{{ user.email }}</h2>
+
+        
+    </div>
+
+    <div class="edit_form">
+        {% if bar_title == 'Customer' %}
+        <h2>{{ profile.phone }}</h2>
+            <form action="{% url 'profile' slug=slug %}" method="post">
+                {% csrf_token %}
+            
+                {% if errors %}
+                    <p>{{ errors }}</p>
+                {% endif %}
+
+                <div class='form_fields'>
+                {{ form.phone.label }}
+                {{ form.phone }}
+                </div>
+            
+                <button type="submit">Submit</button>
+
+            </form>
+        {% elif bar_title == 'Executor' %}
+        <h2>{{ profile.experience }}</h2>
+        <h2>{{ profile.exp_description }}</h2>
+            <form action="{% url 'profile' slug=slug %}" method="post">
+                {% csrf_token %}
+            
+                {% if errors %}
+                    <p>{{ errors }}</p>
+                {% endif %}
+                
+                <div class='form_fields'>
+                {{ form.experience.label }}
+                {{ form.experience }}
+
+                {{ form.exp_description.label }}
+                {{ form.exp_description }}
+                </div>
+            
+                <button type="submit">Submit</button>
+
+            </form> 
+        {% endif %}
+    </div>
+
+
 
 </body>
 </html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class='main_block'>
+        <a href={% url 'profile' slug=customer %}>
+            <div class='choise'>
+                <span>Customer</span>
+            </div>
+        </a>
+
+        <a href={% url 'profile' slug=executor%}>
+            <div class='choise'>
+                <span>Executor</span>
+            </div>
+        </a>
+    </div>
+</body>
+</html>
