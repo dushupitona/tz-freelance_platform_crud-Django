@@ -3,15 +3,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Phone Number</title>
+    <title>Registration</title>
     <link rel="stylesheet" href="{% static 'styles/reg_style.css' %}">
   </head>
   <body>
     
     <form action="{% url 'registration' %}" method="post">
       {% csrf_token %}
-
-      {{type_form.profile_type}}
 
       {{ form.username.label }}
       {{ form.username }}

@@ -9,12 +9,21 @@ p {
 }
 
 .top-bar p {
-    float: right;
+    float: left;
     color: #f2f2f2;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+}
+
+.top-bar a {
+  float: right;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 
 
@@ -26,5 +35,79 @@ body {
 .form_fields {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 300px;
 }
+
+form {
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, rgba(2,0,36,1) 0%, rgba(74,200,192,1) 0%, rgba(48,184,212,1) 85%);
+
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  input {
+    width: 300px;
+    height: 30px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+    padding: 8px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+
+  .main {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+
+  .user_fields {
+    display: block;
+    width: 500px;
+    margin-right: 100px;
+  }
+
+  .edit_form {
+    display: block;
+    width: 500px;
+  }
+
+  .form_field {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .form_field_text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  h2 {
+    margin: 7px;
+  }
+  
+
+ .field_label {
+  color: rgb(85, 11, 114);
+ }

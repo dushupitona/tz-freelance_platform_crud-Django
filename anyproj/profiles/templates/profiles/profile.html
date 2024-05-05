@@ -10,58 +10,93 @@
 
     <div class="top-bar">
         <p>{{ bar_title }}</p>
+        <a href={% url 'index' %}>Главная страница</a>
     </div>
 
     <div class="main">
-        <h2>{{ user.first_name }}</h2>
-        <h2>{{ user.last_name }}</h2>
-        <h2>{{ user.email }}</h2>
+        <div class="user_fields">
+            <div class="form_field">
+                <h2 class='field_label'>Имя:</h2> <h2>{{ user.first_name }}</h2>
+            </div>
 
+            <div class="form_field">
+                <h2 class='field_label'>Фамилия:</h2> <h2>{{ user.last_name }}</h2>
+            </div>
+
+            <div class="form_field">
+            <h2 class='field_label'>Email:</h2> <h2>{{ user.email }}</h2>
+            </div>
+
+            <div class="form_field">
+            <h2 class='field_label'>Номер телефона:</h2> <h2>{{ profile.phone }}</h2>
+            </div>
+
+            {% if bar_title == 'Customer' %}
+
+            {% elif bar_title == 'Executor' %}
+                <div class="form_field">
+                    {% if profile.experience %}
+                        <h2 class='field_label'>Опыт работы в годах:</h2> <h2>{{ profile.experience }}</h2>
+                    {% else %}
+                    <h2 class='field_label'>Опыт работы в годах:</h2>
+                    {% endif %}
+                </div>
+
+                <div class="form_field_text">
+                {% if profile.experience %}
+                    <h2 class='field_label'>Чем занимался:</h2> <h2>{{ profile.exp_description }}</h2>
+                {% else %}
+                    <h2 class='field_label'>Чем занимался:</h2>
+                {% endif %}
+                </div>
+            {% endif %}
+        </div>
         
-    </div>
-
-    <div class="edit_form">
-        {% if bar_title == 'Customer' %}
-        <h2>{{ profile.phone }}</h2>
-            <form action="{% url 'profile' slug=slug %}" method="post">
-                {% csrf_token %}
-            
-                {% if errors %}
-                    <p>{{ errors }}</p>
-                {% endif %}
-
-                <div class='form_fields'>
-                {{ form.phone.label }}
-                {{ form.phone }}
-                </div>
-            
-                <button type="submit">Submit</button>
-
-            </form>
-        {% elif bar_title == 'Executor' %}
-        <h2>{{ profile.experience }}</h2>
-        <h2>{{ profile.exp_description }}</h2>
-            <form action="{% url 'profile' slug=slug %}" method="post">
-                {% csrf_token %}
-            
-                {% if errors %}
-                    <p>{{ errors }}</p>
-                {% endif %}
+    
+        <div class="edit_form">
+            {% if bar_title == 'Customer' %}
+                <form action="{% url 'profile' slug=slug %}" method="post">
+                    {% csrf_token %}
                 
-                <div class='form_fields'>
-                {{ form.experience.label }}
-                {{ form.experience }}
+                    {% if errors %}
+                        <p>{{ errors }}</p>
+                    {% endif %}
 
-                {{ form.exp_description.label }}
-                {{ form.exp_description }}
-                </div>
-            
-                <button type="submit">Submit</button>
+                    <div class='form_fields'>
+                    {{ form.phone.label }}
+                    {{ form.phone }}
+                    </div>
+                
+                    <button type="submit">Submit</button>
 
-            </form> 
-        {% endif %}
+                </form>
+            {% elif bar_title == 'Executor' %}
+
+                <form action="{% url 'profile' slug=slug %}" method="post">
+                    {% csrf_token %}
+                
+                    {% if errors %}
+                        <p>{{ errors }}</p>
+                    {% endif %}
+
+                    <div class='form_fields'>
+                    {{ form.phone.label }}
+                    {{ form.phone }}
+
+                    {{ form.experience.label }}
+                    {{ form.experience }}
+
+                    {{ form.exp_description.label }}
+                    {{ form.exp_description }}
+                    </div>
+                
+                    <button type="submit">Submit</button>
+
+                </form> 
+            {% endif %}
+        </div>
+
     </div>
-
 
 
 </body>

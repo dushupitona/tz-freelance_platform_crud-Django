@@ -1,0 +1,32 @@
+body {
+    background: rgb(2,0,36);
+    background: linear-gradient(45deg, rgba(2,0,36,1) 0%, rgba(74,200,192,1) 0%, rgba(48,184,212,1) 85%);
+}
+
+.choise {
+    display: block;
+    width: 500px;
+    height: 200px;
+    text-align: center;
+    background-color: aquamarine;
+    
+}
+
+.main_block {
+    margin-top: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+a {
+    margin: 50px;
+    text-decoration: none;
+}
+
+span {
+    display: block;
+    padding: 80px;
+    font-size: xx-large;
+    color: rgb(85, 11, 114);
+}

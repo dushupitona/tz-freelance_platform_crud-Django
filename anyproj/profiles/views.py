@@ -1,19 +1,13 @@
 from django.http import HttpResponse, HttpResponseNotFound
-from django.shortcuts import render
 from django.views.generic import TemplateView, FormView
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LogoutView
 from django.shortcuts import redirect
-
-from django.http import HttpResponse, HttpResponseNotFound
 
 from profiles.forms import CustomUserCreationForm, LoginUserForm, CustomerForm, ExecutorForm
 from profiles.models import CustomerModel, ExecutorModel
-# Create your views here.
 
 
 class RegView(FormView):
@@ -36,21 +30,17 @@ class CustomLoginView(LoginView):
         return reverse_lazy('index')
 
 
-
 def logout_view(request):
     logout(request)
     return redirect('/')
 
 
-
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'profiles/profile.html' 
-    login_url = reverse_lazy('registration')
-    
+    login_url = reverse_lazy('login')
 
     customer = CustomerModel
     executor = ExecutorModel
-    
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -67,10 +57,9 @@ class ProfileView(LoginRequiredMixin, TemplateView):
             context['bar_title'] = 'Executor'
             context['profile'] = profile
             context['form_class'] = ExecutorForm
-            context['form'] = ExecutorForm(initial={'experience': profile.experience, 'exp_description': profile.exp_description})
+            context['form'] = ExecutorForm(initial={'phone': profile.phone, 'experience': profile.experience or 'ASD', 'exp_description': profile.exp_description})
         return context  
     
-
     def post(self, request, **kwargs):
         form_class = self.get_context_data()['form_class']
         form = form_class(request.POST)
@@ -81,6 +70,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
                     model.phone = form.cleaned_data.get('phone')
                     model.save()
                 elif model.__class__ is self.executor:
+                    model.phone = form.cleaned_data.get('phone')
                     model.experience = form.cleaned_data.get('experience')
                     model.exp_description = form.cleaned_data.get('exp_description')
                     model.save()
@@ -94,12 +84,8 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         return self.render_to_response(self.get_context_data())
     
 
-    
-
-
 class IndexView(TemplateView):
     template_name = 'profiles/index.html'
-
 
 
 class ChoiseView(TemplateView):
@@ -110,5 +96,3 @@ class ChoiseView(TemplateView):
         context['customer'] = CustomerModel.slug()
         context['executor'] = ExecutorModel.slug()
         return context
-
-

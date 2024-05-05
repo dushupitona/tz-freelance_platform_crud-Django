@@ -1,13 +1,8 @@
-from typing import Any, Mapping
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
-from django.core.files.base import File
-from django.db.models.base import Model
-from django.forms.utils import ErrorList
 from phonenumber_field.formfields import PhoneNumberField
-
 from profiles.models import CustomerModel, ExecutorModel
 
 
@@ -21,7 +16,6 @@ class CustomUserCreationForm(UserCreationForm):
             'first_name': forms.TextInput(attrs={'id': 'custom-first-name', 'class': 'my-class'}),
             'last_name': forms.TextInput(attrs={'id': 'custom-last-name', 'class': 'my-class'}),
         }
-
 
 
 class LoginUserForm(AuthenticationForm):
@@ -41,9 +35,9 @@ class CustomerForm(forms.Form):
         return CustomerModel
         
 
-
 class ExecutorForm(forms.Form):
-    experience = forms.IntegerField()
+    phone = PhoneNumberField()
+    experience = forms.IntegerField(min_value=1, max_value=100)
     exp_description = forms.CharField(widget=forms.Textarea)
     
     @classmethod
